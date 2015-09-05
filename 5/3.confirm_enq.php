@@ -1,28 +1,43 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>入力確認</title>
+<title>入力内容確認</title>
 </head>
+
+<?php
+$name=htmlspecialchars($_POST["name"],ENT_QUOTES);
+
+$email=htmlspecialchars($_POST["email"],ENT_QUOTES);
+
+$age=htmlspecialchars($_POST["age"],ENT_QUOTES);
+?>
+
 <body>
-<h1>入力確認</h1>
+<h1>あなたの入力内容</h1>
 
-<!--var_dump($_POST);-->
-
-<p> <?php echo("お名前：".htmlspecialchars($_POST["name"],ENT_QUOTES));
-?>
+<p>
+お名前：
+<?php echo $name; ?>
 </p>
 
-<p> <?php echo("メールアドレス：".htmlspecialchars($_POST["email"],ENT_QUOTES));
+<p>
+E-mail：
+<?php echo $email; ?>
+</p>
+
+<p>
+年齢：
+<?php
+if (is_numeric($age)){
+    echo $age;
+}else{
+    echo $age."（数値を入力してください。）";
+}
 ?>
 </p>
 
 <p>
-<?php echo("年齢：".htmlspecialchars($_POST["age"],ENT_QUOTES)."歳");
-?>
-</p>
-
-<p>
-<?php echo "性別：";
+<?php echo "性別：";//
 foreach($_POST["gender"] as $gender){
 echo(htmlspecialchars($gender,ENT_QUOTES
 ));
@@ -39,10 +54,18 @@ echo "</p>";
 ?>
 </p>
 
+<br>
+
 <p>この内容でよろしいですか？</p>
 <dt>
+<dl>
+<form  action ="4.input_finish.php" method="POST">
+<input type="hidden" name="    name" value="<?php echo $name; ?>">
+<input type="hidden" name="email" value="<?php echo $email; ?>">
+<input type="submit" value="送　信">
+</form>
 <dl><a href="2.input_enq.php">戻る</a></dl>
-<dl><a href="4.input_finish.php">次へ</a></dl>
+</dl>
 </dt>
 
 </body>
