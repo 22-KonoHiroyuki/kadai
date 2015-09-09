@@ -1,3 +1,16 @@
+<?php
+$pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
+$sql = "SELECT news_id,create_date,news_title10 FROM news ORDER BY create_date DESC LIMIT 5";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//var_dump($results);
+?>
+
+<?
+//=$view
+    ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +22,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<br>
+<?php include("header.php"); ?>
+<br>
     <header class="header">
         <div class="inner clearfix">
             <h1 class="site-title"><a href="#"><img src="img/logo.png" alt="Cheese Academy Tokyo"></a></h1>
@@ -31,17 +47,15 @@
         <h2 class="section-title text-center">
             <span class="section-title__yellow">News</span><span class="section-title-ja text-center">お知らせ・更新情報</span>
         </h2>
-        <article class="news-detail">
-            <dl class="clearfix">
-                <dt class="news-date">2015.07.12</dt>
-                <dd class="news-description">初日開講しました！</dd>
-                <dt class="news-date">2015.06.12</dt>
-                <dd class="news-description">初めてのチーズハッカソンを開催しました！</dd>
-                <dt class="news-date">2015.04.11</dt>
-                <dd class="news-description">トーキョーチーズFesを開催いたしました！</dd>
-            </dl>
-            <p class="view-detail text-right"><a href="#">ニュース一覧を見る</a></p>
-        </article>
+        
+<?php
+foreach($results as $row) {
+//	var_dump($row);
+echo'<a href="news.php/?news_id='.$row['news_id'].'" action="news.php" method="GET">'. substr($row['create_date'],0,10).
+'　　'.
+substr($row['news_title10'],0,10).'</a><br>';
+}
+?>
     </section>
    
     <section class="feature contents-box">
@@ -174,5 +188,8 @@
     </section>
     <!--end #information-->
 <p class="btn-pageTop"><a href="#"><img src="img/btn-pagetop.png" alt=""></a></p>
+<br>
+<?php include("footer.php"); ?>
+<br>
 </body>
 </html>

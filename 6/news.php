@@ -1,3 +1,28 @@
+
+<?php
+//echo $_GET["news_id"];
+$unique_id=$_GET["news_id"];
+var_dump($unique_id);
+?>
+
+<?php
+$pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
+$sql = "SELECT * FROM news where id = '$unique_id'";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+var_dump($results);
+foreach($results as $row) {
+
+//var_dump($row);
+//echo $row["create_date"];
+//echo $row["news_title"];
+//echo $row["news_detail"];
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +34,12 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="header">
+
+<br>
+<?php include("header.php"); ?>
+<br>
+
+               <header class="header">
         <div class="inner clearfix">
             <h1 class="site-title"><a href="#"><img src="img/logo.png" alt="Cheese Academy Tokyo"></a></h1>
             <ul class="list-header text-right">
@@ -22,9 +52,9 @@
     </header>
     
     <section class="news contents-box">
-        <h2 class="section-title text-center">
-            <span class="section-title__yellow">News</span>
-            <span class="section-title-ja text-center">日付</span>
+    <h2 class="section-title text-center">
+    <span class="section-title__yellow">News</span>
+    <span class="section-title-ja text-center"><?php echo $unique_id; ?></span>
         </h2>
         <article class="news-detail">
             <dl class="clearfix">
@@ -51,5 +81,10 @@
     </section>
     <!--end #information-->
 <p class="btn-pageTop"><a href="#"><img src="img/btn-pagetop.png" alt=""></a></p>
+
+<br>
+<?php include("footer.php"); ?>
+<br>
+
 </body>
 </html>
