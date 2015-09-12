@@ -4,17 +4,12 @@ $sql = "SELECT news_id,create_date,news_title10 FROM news ORDER BY create_date D
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//var_dump($results);
 ?>
-
-<?
-//=$view
-    ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>トップページ</title>
     <meta charset="UTF-8">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -22,9 +17,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<br>
-<?php include("header.php"); ?>
-<br>
+
+    <br><?php include("header.php"); ?><br>
+   
     <header class="header">
         <div class="inner clearfix">
             <h1 class="site-title"><a href="#"><img src="img/logo.png" alt="Cheese Academy Tokyo"></a></h1>
@@ -39,29 +34,33 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     <section class="main_visual">
         <div class="inner">
-            <p class="catch text-center">世界を震わすチーズを創ろう。<span class="catch-small">新しい形のチーズ職人養成学校、はじまります。</span></p>
+            <p class="catch text-center">世界を震わすチーズを創ろう。
+            <span class="catch-small">新しい形のチーズ職人養成学校、はじまります。</span></p>
         </div>
     </section>
     
     <section class="news contents-box">
         <h2 class="section-title text-center">
-            <span class="section-title__yellow">News</span><span class="section-title-ja text-center">お知らせ・更新情報</span>
+            <span class="section-title__yellow">News</span>
+            <span class="section-title-ja text-center">お知らせ・更新情報</span>
         </h2>
         
-<?php
-foreach($results as $row) {
-//	var_dump($row);
-echo'<a href="news.php/?news_id='.$row['news_id'].'" action="news.php" method="GET">'. substr($row['create_date'],0,10).
-'　　'.
-substr($row['news_title10'],0,10).'</a><br>';
-}
-?>
+        <?php foreach($results as $row) {
+            echo'<a href="news.php/?news_id='.$row['news_id'].'" action="news.php" method="GET">'.
+                '　　'.
+                    substr($row['create_date'],0,10).
+                '　　'.
+                    $row['news_title10'].'
+            </a><br><br>';
+        }
+        $pdo = null; ?>
     </section>
    
     <section class="feature contents-box">
         <div class="inner">
             <h2 class="section-title text-center">
-                <span class="section-title__white">Feature</span><span class="section-title-ja text-center">特徴</span>
+                <span class="section-title__white">Feature</span>
+                <span class="section-title-ja text-center">特徴</span>
             </h2>
             <ul class="list-feature">
                 <li><img src="img/point1.png" alt=""></li>
@@ -74,7 +73,8 @@ substr($row['news_title10'],0,10).'</a><br>';
     <section class="cource contents-box">
         <div class="inner">
             <h2 class="section-title text-center">
-                <span class="">Cource</span><span class="section-title-ja text-center">コース紹介</span>
+                <span class="">Cource</span>
+                <span class="section-title-ja text-center">コース紹介</span>
             </h2>
             <div class="block-cource block-cource-lab clearfix">
                 <div class="cource-img"><img src="img/cource-lab.png" alt=""></div>
@@ -188,8 +188,8 @@ substr($row['news_title10'],0,10).'</a><br>';
     </section>
     <!--end #information-->
 <p class="btn-pageTop"><a href="#"><img src="img/btn-pagetop.png" alt=""></a></p>
-<br>
-<?php include("footer.php"); ?>
-<br>
+
+<br><?php include("footer.php"); ?><br>
+
 </body>
 </html>
