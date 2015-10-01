@@ -10,6 +10,7 @@ $id = $_GET["news_id"];
 $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
 $sql = "DELETE FROM news WHERE news_id =$id";
 $stmt = $pdo->prepare($sql);
+$stmt->bindValue(':id',$id,PDO::PARAM_INT);
 $result = $stmt->execute();
 //var_dump($sql);
 
@@ -23,7 +24,6 @@ if($result) {
     echo "<br>";
     echo'<a href="update.php" >前のページへ戻る</a>';
 }
-$pdo = null;
 ?>
 <br>
 
@@ -34,9 +34,11 @@ $pdo = null;
     <title>削除処理</title>
 </head>
 <body>
+
    <!--ログアウト-->
     <div class="button">
         <a href="logout.php" >ログアウト</a>
     </div>
+
 </body>
 </html>

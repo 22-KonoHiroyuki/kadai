@@ -63,7 +63,7 @@ session_start();
 ?>
     </div><br>
 
-       <!--ログアウト-->
+<!--ログアウト-->
     <div class="button">
         <a href="logout.php" >ログアウト</a>
     </div>
