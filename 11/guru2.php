@@ -40,10 +40,14 @@ foreach((array)$obj as $key => $val){
             if(checkString($restArray->{'access'}->{'station'})) echo (string)$restArray->{'access'}->{'station'}."\t";
             if(checkString($restArray->{'access'}->{'walk'}))    echo (string)$restArray->{'access'}->{'walk'}."分\t";
            
+            
             foreach((array)$restArray->{'code'}->{'category_name_s'} as $v){
                 if(checkString($v)) echo $v."\t";
             }
-            echo "<br><hr>";
+            
+            echo "<br>";
+            if(checkString($restArray->{'url'}))    echo "<a href=".$restArray->{'url'}.">リンク</a>";
+            echo "<hr>";
        }
     }
 }
