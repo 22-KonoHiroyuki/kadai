@@ -1,0 +1,19 @@
+.radio-button{
+float: left;
+}
+
+.after{
+clear:both;
+}
+
+.mapname{
+    text-align: center;
+    font-size: 30px;
+    color: blueviolet;
+}
+
+#map {
+    width: 75%;
+    height: 500px;
+    margin: 10px auto;
+}
